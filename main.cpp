@@ -13,6 +13,7 @@ typedef struct login_{
 bool checkPassword(string str) {
     bool characters = false;
     bool numbers = false;
+    int size = 0;
 
     for (char c : str) {
         if (isalpha(c)) {
@@ -20,6 +21,10 @@ bool checkPassword(string str) {
         } else if (isdigit(c)) {
             numbers = true;
         }
+        size++;
+    }
+    if(size < 8) {
+        return false;
     }
 
     return characters && numbers;
@@ -30,6 +35,7 @@ void newLogin(Login login) {
     scanf(" %s", login.email);
     bool check_password = false;
     while(check_password == false) {
+        printf("\n(The password need 8 characters, number and letters)\n");
         printf("Password: ");
         scanf(" %s", login.pass);
         check_password = checkPassword(login.pass);
@@ -37,6 +43,16 @@ void newLogin(Login login) {
             printf("\nInvalid password, enter again.\n\n");
         }
     }
+}
+
+bool loginExists(Login login) {
+    string check_email;
+    string check_password;
+    printf("Email: ");
+    scanf(" %s", check_email);
+    printf("Password: ");
+    scanf(" %s", check_password);
+    
 }
 
 int main() {
