@@ -7,15 +7,15 @@ using namespace std;
 typedef struct login_{
     char email[40];
     char pass[15];
-    //struct login_ *next;
+    struct login_ *next;
 }Login;
 
-bool checkPassword(string str) {
+bool checkPassword(string password) {
     bool characters = false;
     bool numbers = false;
     int size = 0;
 
-    for (char c : str) {
+    for (char c : password) {
         if (isalpha(c)) {
             characters = true;
         } else if (isdigit(c)) {
@@ -55,14 +55,22 @@ bool loginExists(Login login) {
     
 }
 
+Login *readFile(fstream file) {
+    Login *begin = nullptr;
+    string email, password;
+    file >> email;
+    while(email != "END") {
+        begin->email = email;
+        file >> password;
+        begin->pass = password;
+    }
+}
+
 int main() {
-    //Login *begin = NULL;
     fstream file("login.ods");
     if(!file.is_open()) {
         printf("The file of login doesn't exist.\n");
     }
-    Login login;
-    newLogin(login);
 
 
     return 0;
