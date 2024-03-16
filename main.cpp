@@ -134,18 +134,21 @@ int main() {
         if(answer == 1) {
             string check_email;
             string check_password;
-            cout << "(0 to comeback.)" << endl;
-            cout << "Email: ";
-            cin >> check_email;
-            if(check_email != "0") {
-                cout << "Password: ";
-                cin >> check_password;
-                bool check_login = loginExists(begin, check_email, check_password);
-                if(check_login == true) {
-                    cout << "Welcome to our site!" << endl;
-                    answer = 0;
-                } else {
-                    cout << "Email or password incorrect." << endl;
+            bool check_login = false;
+            while(check_email != "0" &&  check_login != true) {
+                cout << "(0 to comeback.)" << endl;
+                cout << "Email: ";
+                cin >> check_email;
+                if(check_email != "0") {
+                    cout << "Password: ";
+                    cin >> check_password;
+                    check_login = loginExists(begin, check_email, check_password);
+                    if(check_login == true) {
+                        cout << "Welcome to our site!" << endl;
+                        answer = 0;
+                    } else {
+                        cout << "Email or password incorrect." << endl;
+                    }
                 }
             }
         } else if(answer == 2) {
