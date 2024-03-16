@@ -71,13 +71,7 @@ Login *newLogin(Login *begin) {
 }
 
 // it will check email and password for user who tries login
-bool loginExists(Login *begin) {
-    string check_email;
-    string check_password;
-    cout << "Email: ";
-    cin >> check_email;
-    cout << "Password: ";
-    cin >> check_password;
+bool loginExists(Login *begin, string check_email, string check_password) {
     Login *aux = begin;
     
     while(aux != nullptr) {
@@ -128,14 +122,37 @@ int main() {
     }
 
     Login *begin = readFile(file);
-    // showLogins(begin);
-    // if(loginExists(begin) == true) {
-    //     cout << "OK" << endl;
-    // }
+    int answer = -1;
 
-    begin = newLogin(begin);
-    showLogins(begin);
-
+    while(answer != 0) {
+        cout << "---------------------------------------------------------" << endl;
+        cout << "Hello to my random site! Select an option:" << endl;
+        cout << "0 - EXIT" << endl;
+        cout << "1 - Enter with yout email." << endl;
+        cout << "2 - Create an account." << endl;
+        cin >> answer;
+        if(answer == 1) {
+            string check_email;
+            string check_password;
+            cout << "(0 to comeback.)" << endl;
+            cout << "Email: ";
+            cin >> check_email;
+            if(check_email != "0") {
+                cout << "Password: ";
+                cin >> check_password;
+                bool check_login = loginExists(begin, check_email, check_password);
+                if(check_login == true) {
+                    cout << "Welcome to our site!" << endl;
+                    answer = 0;
+                } else {
+                    cout << "Email or password incorrect." << endl;
+                }
+            }
+        } else if(answer == 2) {
+            begin = newLogin(begin);
+            answer = 0;
+        }
+    }
 
     return 0;
 }
