@@ -62,7 +62,6 @@ Login *newLogin(Login *begin) {
         temp->next = new_login;
     }
 
-    // I think the error for save the new login is here
     ofstream file("login", ios::app);
     file << new_login->email << " " << new_login->pass << endl;
     file.close();
@@ -128,7 +127,7 @@ int main() {
         cout << "---------------------------------------------------------" << endl;
         cout << "Hello to my random site! Select an option:" << endl;
         cout << "0 - EXIT" << endl;
-        cout << "1 - Enter with yout email." << endl;
+        cout << "1 - Enter with your email." << endl;
         cout << "2 - Create an account." << endl;
         cin >> answer;
         if(answer == 1) {
